@@ -1,0 +1,17 @@
+.idea
+.svn
+*.iml
+target
+.settings
+.classpath
+.project
+lib
+*/lib
+*/source
+*/target
+**/*.jar
+.DS_Store
+**/.cache-*
+*.ipr
+*.iws
+**/mysql.properties

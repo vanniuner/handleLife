@@ -7,11 +7,10 @@
 	</settings>
 
 	<typeAliases>
-		<!--<typeAlias alias="TbOpsCategoryDailyScore" type="com.ximalaya.ops.rms.bean.TbOpsCategoryDailyScore" />-->
+		<typeAlias alias="TbTest" type="com.gpagers.cn.handle.model.TbTest" />
 
 	</typeAliases>
 	<mappers>
-		<!--<mapper resource="sqlMapper/TbOpsCategoryDailyScoreMapper.xml" />-->
-
+		<mapper resource="sqlMapper/TbTestMapper.xml" />
 	</mappers>
 </configuration> 

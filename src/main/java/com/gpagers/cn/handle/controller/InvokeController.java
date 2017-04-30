@@ -1,8 +1,10 @@
 package com.gpagers.cn.handle.controller;
 
+import com.gpagers.cn.handle.dao.TbTestMapper;
 import com.gpagers.cn.handle.model.SimpleRsult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class InvokeController {
 
     static Logger logger = LoggerFactory.getLogger(InvokeController.class);
+
+    @Autowired
+    TbTestMapper tbTestMapper;
 
     /**
      * 触发score导入的数据

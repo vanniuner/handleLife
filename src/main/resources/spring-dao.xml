@@ -41,7 +41,7 @@
         <!--注入SqlSessionFactory-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!-- 给出需要扫描的Dao接口-->
-        <property name="basePackage" value="com.ximalaya.ops.rms.dao"/>
+        <property name="basePackage" value="com.gpagers.cn.handle.dao"/>
     </bean>
 
 
