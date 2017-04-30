@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE toolbox>
+<toolbox>
+	<tool>
+		<key>date</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.DateTool</class>
+	</tool>
+	<tool>
+		<key>escape</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.EscapeTool</class>
+	</tool>
+	<tool>
+		<key>math</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.MathTool</class>
+	</tool>
+	<tool>
+		<key>link</key>
+		<scope>request</scope>
+		<class>org.apache.velocity.tools.generic.LinkTool</class>
+	</tool>
+	<tool>
+		<key>context</key>
+		<scope>request</scope>
+		<class>org.apache.velocity.tools.generic.ContextTool</class>
+	</tool>
+	<tool>
+		<key>date</key>
+		<scope>application</scope>
+		<class>com.ximalaya.ops.com.gpagers.cn.handle.velocity.DateFormateVTL</class>
+	</tool>
+</toolbox>

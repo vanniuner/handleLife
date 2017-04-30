@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<!-- 配置静态资源 -->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+	<!-- 启用spring mvc 注解 -->
+    <mvc:annotation-driven /> 
+    <!-- 设置使用注解的类所在的jar包 -->
+    <context:component-scan base-package="com.gpagers.cn.handle.controller" />
+
+	
+	<!--<bean id="defaultAnnotationHandlerMapping"-->
+		<!--class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />-->
+	<!--<bean id="annotationMethodHandlerAdapter"-->
+		<!--class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >-->
+	<!--</bean>-->
+
+	<bean id="stringConverter"
+		  class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="jsonConverter"
+		  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="stringConverter" />
+				<ref bean="jsonConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置velocity -->
+	<bean id="velocityConfigurer"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath">
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+				<prop key="file.resource.loader.cache">false</prop>
+			</props>
+		</property>
+	</bean>
+	<!--配置附加工具，以及将后缀为vm的文件交给下面的Resolver处理-->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="cache" value="false"/>
+        <property name="suffix" value=".vm"/>
+        <property name="contentType" value="text/html;charset=utf-8"/>
+        <property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="allowSessionOverride" value="true"/>
+        <property name="allowRequestOverride" value="true"/>
+        <property name="order" value="2"/>
+    </bean>
+    
+    <bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+</beans>
