@@ -28,8 +28,6 @@
 
 	<!-- 引入xml文件 -->
 	<import resource="classpath:spring-dao.xml" />
-	<!--<import resource="classpath:spring-rabbit.xml" />-->
-
 	<bean id="velocityEngine"
 		  class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
 		<property name="velocityProperties">
