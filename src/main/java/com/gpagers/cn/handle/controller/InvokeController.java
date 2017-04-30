@@ -2,6 +2,7 @@ package com.gpagers.cn.handle.controller;
 
 import com.gpagers.cn.handle.dao.TbTestMapper;
 import com.gpagers.cn.handle.model.SimpleRsult;
+import com.gpagers.cn.handle.model.TbTestExample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class InvokeController {
         SimpleRsult sr = new SimpleRsult();
         try {
             sr.setMessage(SimpleRsult.success);
+            sr.setData(tbTestMapper.selectByExample(new TbTestExample()));
         }catch (Exception e){
             logger.error("error",e);
             sr.setCode(500);

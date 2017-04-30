@@ -4,7 +4,9 @@ import com.gpagers.cn.handle.model.TbTest;
 import com.gpagers.cn.handle.model.TbTestExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TbTestMapper {
     int countByExample(TbTestExample example);
 
