@@ -8,9 +8,11 @@
 
 	<typeAliases>
 		<typeAlias alias="TbTest" type="com.gpagers.cn.handle.model.TbTest" />
+		<typeAlias alias="TbTingsMajor" type="com.gpagers.cn.handle.model.TbTingsMajor" />
 
 	</typeAliases>
 	<mappers>
 		<mapper resource="sqlMapper/TbTestMapper.xml" />
+		<mapper resource="sqlMapper/TbTingsMajorMapper.xml" />
 	</mappers>
 </configuration> 
