@@ -1,5 +1,6 @@
 package com.gpagers.cn.handle.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.gpagers.cn.handle.dao.TbTingsMajorMapper;
 import com.gpagers.cn.handle.model.SimpleRsult;
 import com.gpagers.cn.handle.model.TbTingsMajorExample;
@@ -33,7 +34,9 @@ public class InvokeController {
             TbTingsMajorExample example = new TbTingsMajorExample();
             TbTingsMajorExample.Criteria criteria = example.createCriteria();
             criteria.andTitleLike(search+"%");
+            PageHelper.startPage(1, 10);
             sr.setData(majorMapper.selectByExample(example));
+            sr.setCode(200);
         }catch (Exception e){
             logger.error("error",e);
             sr.setCode(500);
