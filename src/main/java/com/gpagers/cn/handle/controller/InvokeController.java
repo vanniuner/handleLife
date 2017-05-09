@@ -21,20 +21,22 @@ public class InvokeController {
     @Autowired
     TbTingsMajorMapper majorMapper;
 
+    static int pageSize = 15;
+
     /**
      * @param search
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "search")
-    public SimpleRsult score(@RequestParam("search") String search) {
+    public SimpleRsult score(@RequestParam("search") String search,@RequestParam("pageNum") Integer pageNum) {
         SimpleRsult sr = new SimpleRsult();
         try {
             sr.setMessage(SimpleRsult.success);
             TbTingsMajorExample example = new TbTingsMajorExample();
             TbTingsMajorExample.Criteria criteria = example.createCriteria();
             criteria.andTitleLike(search+"%");
-            PageHelper.startPage(1, 10);
+            PageHelper.startPage(pageNum, pageSize);
             sr.setData(majorMapper.selectByExample(example));
             sr.setCode(200);
         }catch (Exception e){
