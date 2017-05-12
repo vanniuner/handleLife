@@ -3,6 +3,7 @@ package com.gpagers.cn.handle.controller;
 import com.github.pagehelper.PageHelper;
 import com.gpagers.cn.handle.dao.TbTingsMajorMapper;
 import com.gpagers.cn.handle.model.SimpleRsult;
+import com.gpagers.cn.handle.model.TbTingsMajor;
 import com.gpagers.cn.handle.model.TbTingsMajorExample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping(value = "/tings")
@@ -46,5 +49,26 @@ public class InvokeController {
         }
         return sr;
     }
+
+    /**
+     * @param major
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "doc/update")
+    public SimpleRsult update(HttpServletResponse response, TbTingsMajor major) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        SimpleRsult sr = new SimpleRsult();
+        sr.setCode(200);
+        try {
+            majorMapper.updateByPrimaryKeySelective(major);
+        }catch (Exception e){
+            sr.setCode(500);
+            sr.setMessage(SimpleRsult.systemError);
+        }
+        return sr;
+    }
+
+
 
 }
