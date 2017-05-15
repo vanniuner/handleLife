@@ -78,6 +78,7 @@ public class InvokeController {
     @ResponseBody
     @RequestMapping(value = "doc/update")
     public SimpleRsult update(HttpServletResponse response, TbTingsMajor major) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         SimpleRsult sr = new SimpleRsult();
         sr.setCode(200);
 
