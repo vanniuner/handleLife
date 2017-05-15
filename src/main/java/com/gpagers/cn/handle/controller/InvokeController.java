@@ -51,6 +51,26 @@ public class InvokeController {
     }
 
     /**
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "content")
+    public SimpleRsult content(@RequestParam("id") Integer id) {
+        SimpleRsult sr = new SimpleRsult();
+        sr.setCode(200);
+        try{
+            TbTingsMajor major = majorMapper.selectByPrimaryKey(id);
+            sr.setData(major);
+            sr.setMessage("操作成功");
+        }catch (Exception e){
+            sr.setCode(500);
+            sr.setMessage(SimpleRsult.systemError);
+        }
+        return sr;
+    }
+
+    /**
      * @param major
      * @return
      */
@@ -60,8 +80,14 @@ public class InvokeController {
         response.setHeader("Access-Control-Allow-Origin", "*");
         SimpleRsult sr = new SimpleRsult();
         sr.setCode(200);
+
         try {
-            majorMapper.updateByPrimaryKeySelective(major);
+            if(major.getId()==null){
+                majorMapper.insert(major);
+            }else {
+                majorMapper.updateByPrimaryKeySelective(major);
+            }
+            sr.setMessage("操作成功");
         }catch (Exception e){
             sr.setCode(500);
             sr.setMessage(SimpleRsult.systemError);
