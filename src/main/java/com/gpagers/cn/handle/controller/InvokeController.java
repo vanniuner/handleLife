@@ -56,7 +56,8 @@ public class InvokeController {
      */
     @ResponseBody
     @RequestMapping(value = "content")
-    public SimpleRsult content(@RequestParam("id") Integer id) {
+    public SimpleRsult content(HttpServletResponse response,@RequestParam("id") Integer id) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         SimpleRsult sr = new SimpleRsult();
         sr.setCode(200);
         try{
@@ -77,7 +78,6 @@ public class InvokeController {
     @ResponseBody
     @RequestMapping(value = "doc/update")
     public SimpleRsult update(HttpServletResponse response, TbTingsMajor major) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         SimpleRsult sr = new SimpleRsult();
         sr.setCode(200);
 
