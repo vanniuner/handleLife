@@ -2,9 +2,12 @@ package com.gpagers.cn.handle.dao;
 
 import com.gpagers.cn.handle.model.TbTingsMajor;
 import com.gpagers.cn.handle.model.TbTingsMajorExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface TbTingsMajorMapper {
     int countByExample(TbTingsMajorExample example);
 
