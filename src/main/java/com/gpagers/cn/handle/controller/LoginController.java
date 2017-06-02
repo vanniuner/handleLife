@@ -1,7 +1,9 @@
 package com.gpagers.cn.handle.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.gpagers.cn.handle.dao.TbTingsMajorMapper;
 import com.gpagers.cn.handle.model.SimpleRsult;
+import com.gpagers.cn.handle.util.GlobalCache;
 import com.gpagers.cn.handle.util.HttpClientUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/wx")
@@ -36,14 +40,19 @@ public class LoginController {
      */
     @ResponseBody
     @RequestMapping(value = "login")
-    public SimpleRsult login(@RequestParam("code") String code) {
+    public SimpleRsult login(HttpServletRequest request, @RequestParam("code") String code) {
         SimpleRsult sr = new SimpleRsult();
         try {
-            String url = String.format(code2session, appId,secret,code);
-            String response = HttpClientUtil.doGet(url);
-
-            sr.setData(response);
+            String sessionId = request.getSession(false).getId();
+            if(GlobalCache.getLoginData(sessionId)==null) {
+                String url = String.format(code2session, appId,secret,code);
+                String response = HttpClientUtil.doGet(url);
+                String openid = JSONObject.parseObject(response).getString("openid");
+                GlobalCache.putLoginData(request.getSession(false).getId(), openid);
+            }
+            sr.setData(sessionId);
             sr.setCode(200);
+            sr.setMessage(SimpleRsult.success);
         }catch (Exception e){
             logger.error("error",e);
             sr.setCode(500);

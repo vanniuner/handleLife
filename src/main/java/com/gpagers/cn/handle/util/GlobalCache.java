@@ -54,7 +54,7 @@ public class GlobalCache {
         put(LoginDataCN,key,value);
     }
 
-    public String getLoginData(String key){
+    public static String getLoginData(String key){
         return (String)get(LoginDataCN,key);
     }
 
