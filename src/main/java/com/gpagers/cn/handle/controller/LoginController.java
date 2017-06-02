@@ -5,6 +5,7 @@ import com.gpagers.cn.handle.dao.TbTingsMajorMapper;
 import com.gpagers.cn.handle.model.SimpleRsult;
 import com.gpagers.cn.handle.util.GlobalCache;
 import com.gpagers.cn.handle.util.HttpClientUtil;
+import com.gpagers.cn.handle.util.RandomStr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +41,18 @@ public class LoginController {
      */
     @ResponseBody
     @RequestMapping(value = "login")
-    public SimpleRsult login(HttpServletRequest request, @RequestParam("code") String code) {
+    public SimpleRsult login(HttpServletRequest request, @RequestParam("code") String code,
+        @RequestParam(value = "sessionId",required = false) String sessionId) {
         SimpleRsult sr = new SimpleRsult();
         try {
-            String sessionId = request.getSession().getId();
             logger.info("sessionId:" + sessionId);
-            if(GlobalCache.getLoginData(sessionId)==null) {
+            if(sessionId==null || GlobalCache.getLoginData(sessionId)==null) {
+                if(sessionId==null) {
+                    sessionId = RandomStr.randomStr(12);
+                    while(GlobalCache.getLoginData(sessionId)!=null){
+                        sessionId = RandomStr.randomStr(12);
+                    }
+                }
                 String url = String.format(code2session, appId,secret,code);
                 String response = HttpClientUtil.doGet(url);
                 String openid = JSONObject.parseObject(response).getString("openid");
