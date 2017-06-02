@@ -23,7 +23,6 @@
 			<list>
 				<value>classpath:log4j.properties</value>
 				<value>classpath:mysql.properties</value>
-				<value>classpath:wx.properties</value>
 			</list>
 		</property>
 	</bean>

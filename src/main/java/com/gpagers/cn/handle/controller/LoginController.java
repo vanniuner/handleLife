@@ -43,6 +43,7 @@ public class LoginController {
         try {
             String url = String.format(code2session, appId,secret,code);
             String response = HttpClientUtil.doGet(url);
+
             sr.setData(response);
             sr.setCode(200);
         }catch (Exception e){
