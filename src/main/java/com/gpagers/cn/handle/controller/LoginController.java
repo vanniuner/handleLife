@@ -43,12 +43,13 @@ public class LoginController {
     public SimpleRsult login(HttpServletRequest request, @RequestParam("code") String code) {
         SimpleRsult sr = new SimpleRsult();
         try {
-            String sessionId = request.getSession(false).getId();
+            String sessionId = request.getSession().getId();
+            logger.info("sessionId:" + sessionId);
             if(GlobalCache.getLoginData(sessionId)==null) {
                 String url = String.format(code2session, appId,secret,code);
                 String response = HttpClientUtil.doGet(url);
                 String openid = JSONObject.parseObject(response).getString("openid");
-                GlobalCache.putLoginData(request.getSession(false).getId(), openid);
+                GlobalCache.putLoginData(request.getSession().getId(), openid);
             }
             sr.setData(sessionId);
             sr.setCode(200);
