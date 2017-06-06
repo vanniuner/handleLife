@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 @RequestMapping(value = "/wx")
 public class LoginController {
@@ -41,7 +39,7 @@ public class LoginController {
      */
     @ResponseBody
     @RequestMapping(value = "login")
-    public SimpleRsult login(HttpServletRequest request, @RequestParam("code") String code,
+    public SimpleRsult login(@RequestParam("code") String code,
         @RequestParam(value = "sessionId",required = false) String sessionId) {
         SimpleRsult sr = new SimpleRsult();
         try {
@@ -57,7 +55,7 @@ public class LoginController {
                 String url = String.format(code2session, appId,secret,code);
                 String response = HttpClientUtil.doGet(url);
                 String openid = JSONObject.parseObject(response).getString("openid");
-                GlobalCache.putLoginData(request.getSession().getId(), openid);
+                GlobalCache.putLoginData(sessionId, openid);
                 logger.info("reload:" + sessionId);
             }
             sr.setData(sessionId);
