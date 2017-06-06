@@ -47,6 +47,7 @@ public class LoginController {
         try {
             logger.info("sessionId:" + sessionId);
             if(sessionId==null || GlobalCache.getLoginData(sessionId)==null) {
+
                 if(sessionId==null) {
                     sessionId = RandomStr.randomStr(12);
                     while(GlobalCache.getLoginData(sessionId)!=null){
@@ -57,6 +58,7 @@ public class LoginController {
                 String response = HttpClientUtil.doGet(url);
                 String openid = JSONObject.parseObject(response).getString("openid");
                 GlobalCache.putLoginData(request.getSession().getId(), openid);
+                logger.info("reload:" + sessionId);
             }
             sr.setData(sessionId);
             sr.setCode(200);
