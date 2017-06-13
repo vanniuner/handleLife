@@ -55,6 +55,8 @@ public class LoginController {
                 String url = String.format(code2session, appId,secret,code);
                 String response = HttpClientUtil.doGet(url);
                 String openid = JSONObject.parseObject(response).getString("openid");
+                String sessionKey = JSONObject.parseObject(response).getString("session_key");
+                logger.info("sessionKey:" + sessionKey);
                 GlobalCache.putLoginData(sessionId, openid);
                 logger.info("reload:" + sessionId);
             }
