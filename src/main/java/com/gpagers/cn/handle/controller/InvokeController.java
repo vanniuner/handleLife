@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
@@ -96,6 +98,11 @@ public class InvokeController {
         return sr;
     }
 
+    @RequestMapping(value = "foward")
+    public void foward(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("http://m.ximalaya.com/49265909/album/7368509/");
+        dispatcher.forward(request, response);
+    }
 
 
 }
