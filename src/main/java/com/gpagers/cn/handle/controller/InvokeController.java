@@ -102,6 +102,7 @@ public class InvokeController {
     public void foward(HttpServletRequest request, HttpServletResponse response) throws Exception {
         RequestDispatcher dispatcher = request.getRequestDispatcher("http://m.ximalaya.com/49265909/album/7368509/");
         dispatcher.forward(request, response);
+
     }
 
 
